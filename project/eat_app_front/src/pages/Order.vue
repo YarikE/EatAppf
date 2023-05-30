@@ -2,8 +2,8 @@
     <NavBar/>
     <h1 class="page_category">Заказ</h1>
     <div class="block_content">
-        <div class="d-flex flex-row">
-            <form @submit.prevent class="p-2">
+        <div class="d-flex">
+            <form @submit.prevent class="align-self-start">
                 <div class="select_user">
                     <p>Выберите сотрудника:&nbsp</p>
                     <select v-model="selectedUser">
@@ -25,6 +25,7 @@
                         </option>
                     </select>
                     <span v-if="selectedDish">&nbsp&nbsp{{ dishes.find(dish => dish.dish_name === selectedDish).dish_price }}₽</span>
+                    <div v-if="selectedDish" class="compound">Состав: <br/> {{ dishes.find(dish => dish.dish_name === selectedDish).dish_compose }}</div>
                 </div>
 
                 <button @click="addDishPost">Добавить блюдо</button>
@@ -36,8 +37,8 @@
                 <div class="dish_posts">
                     <div v-for="(dish, index) in dish_posts" :key="index">
                         <div class="dish">
-                            <div><h3>Название блюда: {{ dish.dish_name }}</h3></div>
-                            <div><h4>Цена блюда: {{ dish.dish_price }}₽</h4></div>
+                            <div class="dish_name"><h4>Название блюда: <br/> {{ dish.dish_name }}</h4></div>
+                            <div>Цена блюда: {{ dish.dish_price }}₽</div>
                             <div class="dish_count">
                                 <div>Кол-во: {{ dish.dish_count }}</div>
                                 <button class="count_button" @click="incrementCountDish(index)">+</button>
@@ -143,4 +144,25 @@ export default {
 
 <style lang="scss" scoped>
 
+.dish_name{
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+.compound{
+    margin-top: 10px;
+    width: 170px;
+    height: auto;
+    word-wrap: break-word;
+}
+
+.align-self-start{
+    border: 2px solid rgb(16, 127, 179);
+    border-radius: 25px;
+    padding: 15px;
+
+}
+
+.d-flex flex-row{
+    align-items: flex-start;    
+}
 </style>

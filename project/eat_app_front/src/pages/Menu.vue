@@ -36,6 +36,11 @@ export default {
 </script>
 
 <style lang="scss">
+.dish_name{
+    font-family: 'Roboto Condensed', sans-serif;
+}
 
-
+.dish_price{
+    font-family: 'Roboto Condensed', sans-serif;
+}
 </style>

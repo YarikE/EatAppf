@@ -3,7 +3,7 @@
     <h1 class="page_category">Режим "Мне повезет"</h1>
     <div class="block_content">
         <div class="d-flex flex-row">
-            <div class="p-2">
+            <form @submit.prevent class="align-self-start">
                 <div class="select_user">
                     <p>Выберите сотрудника:&nbsp</p>
                     <select v-model="selectedUser">
@@ -26,14 +26,14 @@
                 <div class="primary_button">
                     <button class="bg-primary text-white" v-if="this.dish_posts.length" @click="sendUsersChoice">Заказать</button>
                 </div>
-            </div>
+            </form>
 
             <div class="p-2">
                 <div class="dish_posts">
                     <div v-for="(dish, index) in dish_posts" :key="index">
                         <div class="dish">
-                            <div><h3>Название блюда: {{ dish.dish_name }}</h3></div>
-                            <div><h4>Цена блюда: {{ dish.dish_price }} ₽</h4></div>
+                            <div class="dish_name"><h3>Название блюда: <br/> {{ dish.dish_name }}</h3></div>
+                            <div><h4>Цена блюда: {{ dish.dish_price }}₽</h4></div>
                             <div class="dish_count">
                                 <div>Кол-во: {{ dish.dish_count }} &nbsp&nbsp</div>
                                 <button class="count_button" @click="incrementCountDish(index)">+</button>
@@ -134,5 +134,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.dish_name{
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+.compound{
+    margin-top: 10px;
+    width: 170px;
+    height: auto;
+    word-wrap: break-word;
+}
 
+.align-self-start{
+    border: 2px solid rgb(16, 127, 179);
+    border-radius: 25px;
+    padding: 15px;
+
+}
+
+.d-flex flex-row{
+    align-items: flex-start;    
+}
 </style>

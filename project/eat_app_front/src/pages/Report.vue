@@ -10,7 +10,7 @@
         <div class="table_block">
           <table class="order_table">
               <thead>
-              <tr>
+              <tr class="order_table_head">
                   <th>Название</th>
                   <th>Количество</th>
                   <th>Цена в момент заказа</th>
@@ -70,18 +70,25 @@ export default {
 <style lang="scss" scoped>
 
 .order_table{
-  border: 3px solid #000;
+  border: 2px solid #000;
 }
 
 th, td {
-  border: 2px solid #b8b8b8;
+  border: 1px solid #b8b8b8;
+  text-align: center;
 }
 
 th {
   font-size: large;
+  padding: 4px;
 }
+
 
 .table_block{
   margin-top: 3%;
+}
+
+.order_table_head {
+    font-family: 'Roboto Condensed', sans-serif;
 }
 </style>

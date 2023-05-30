@@ -33,10 +33,15 @@ class Order(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Имя сотрудника')
     order_date = models.DateField(null=False, verbose_name='Дата заказа')
 
+    def __str__(self):
+        return f'{self.pk}'
+
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
         ordering = ['order_date', 'pk']
+
+
 
 
 # Блюдо заказа
@@ -46,9 +51,10 @@ class OrderedDish(models.Model):
     dish_count = models.IntegerField(null=False, default=1, verbose_name='Кол-во блюд')
     dish_now_price = models.IntegerField(null=False, default=50, verbose_name='Цена блюда на момент заказа')
 
-    def __str__(self):
-        return self.pk
 
     class Meta:
         verbose_name = 'Блюдо заказа'
         verbose_name_plural = 'Блюда заказов'
+
+    def __str__(self):
+        return f'Заказ {self.order_id}'

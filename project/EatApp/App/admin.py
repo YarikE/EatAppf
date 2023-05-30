@@ -2,15 +2,18 @@ from django.contrib import admin
 
 from .models import User, Dish, Order, OrderedDish
 
+
 class UserAdmin(admin.ModelAdmin):
     list_display = ['user_name']
     search_fields = ['user_name']
+
 
 class DishAdmin(admin.ModelAdmin):
     list_display = ['dish_name', 'dish_compose', 'dish_price']
     list_display_links = ['dish_name', 'dish_compose']
     search_fields = ['dish_name', 'dish_compose']
-
+    list_filter = ['dish_price']
+ 
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['pk', 'user_id', 'order_date']

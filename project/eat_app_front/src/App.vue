@@ -20,15 +20,17 @@ export default {
 }
 
 .dish_element{
-    border: 2px solid teal;
+    border: 2px solid rgb(16, 127, 179);
+    border-radius: 10px;
     margin: 40px 1% 1%;
     padding: 10px;
 }
 
 .page_category{
     margin-left: 3%;
-    margin-top: 1%;
-    margin-bottom: 3%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-family: 'Lobster', cursive;
 }
 .block_content{
     margin-left: 2%;
@@ -56,7 +58,10 @@ p {
 .dish{
     margin-bottom: 5%;
     border: 2px solid #b8b8b8;
+    border-radius: 10px;
     padding: 5%;
+    text-align: justify;
+    width: 250px;
 }
 
 .count_button{
