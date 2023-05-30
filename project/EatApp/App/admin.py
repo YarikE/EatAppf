@@ -18,11 +18,13 @@ class DishAdmin(admin.ModelAdmin):
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['pk', 'user_id', 'order_date']
     search_fields = ['pk', 'order_date']
+    list_filter = ['order_date']
 
 
 class OrderedDishAdmin(admin.ModelAdmin):
     list_display = ['dish_id', 'order_id', 'dish_count', 'dish_now_price']
     search_fields = ['dish_id', 'order_id']
+    list_filter = ['dish_now_price']
 
 
 admin.site.register(User, UserAdmin)

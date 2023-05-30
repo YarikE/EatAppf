@@ -1,24 +1,29 @@
 # EatApp - приложение для заказа еды
 
-## Переходим в backend приложение 
-    cd EatApp   
+# Архитектура проекта
+    Проект состоит из 2х приложений 
+    1) Backend (папка EatApp)
+    2) Frontend (папка eat_app_front)
 
+    Для запуска проекта нужно запустить и Backend и Frontend приложения в разных консолях
+
+
+# Запуск проекта
+
+
+## Запускаем первую консоль и переходим в папку EatApp  
 
 ## Устанавливаем все зависимости backend приложения
     pip install -r requirements.txt
 
+## Запускаем Backend приложение
+    python3 manage.py runserver
 
-## Переход в папку с frontend приложением
-    cd ..
-    cd eat_app_front
+
+## Запускаем вторую консоль и переходим в папку eat_app_front
 
 ## Устанавливаем все зависимости frontend приложения
     npm i
 
-## Из папки EatAppf/project/EatApp запускаем backend приложение командой:
-    python manage.py runserver (windows)
-
-    python3 manage.py runserver (linux)
-
-## Из папки EatAppf/project/eat_app_front запускаем frontend приложение: 
+## Запускаем frontend приложение 
     npm run serve
