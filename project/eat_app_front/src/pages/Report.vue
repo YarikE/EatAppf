@@ -1,33 +1,38 @@
-<template xmlns="http://www.w3.org/1999/html">
-    <NavBar/>
-    <h1 class="page_category">Отчет "Заказы по дате"</h1>
-    <div class="block_content">
-        <div class="form_block">
-            <input type="date" v-model="selectedDate">
-            <button @click="getDateReport(selectedDate)">Сформировать отчет за дату</button>
-        </div>
+<template>
+    <div v-if="isData === true">
+        <NavBar/>
+        <h1 class="page_category">Отчет "Заказы по дате"</h1>
+        <div class="block_content">
+            <div class="form_block">
+                <input type="date" v-model="selectedDate">
+                <button @click="getDateReport(selectedDate)">Сформировать отчет за дату</button>
+            </div>
 
-        <div class="table_block">
-          <table class="order_table">
-              <thead>
-              <tr class="order_table_head">
-                  <th>Название</th>
-                  <th>Количество</th>
-                  <th>Цена в момент заказа</th>
-                  <th>Общая стоимость</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr v-for="(dish_info, dish_name, index) in orderData" :key="index">
-                  <td>{{ dish_name }}</td>
-                  <td>{{ dish_info.dish_count }}</td>
-                  <td>{{ dish_info.dish_now_price }}</td>
-                  <td>{{ dish_info.dish_count * dish_info.dish_now_price }}</td>
-              </tr>
-              </tbody>
-          </table>
-          <p>Общая стоимость: {{ total }}</p>
+            <div class="table_block">
+            <table class="order_table">
+                <thead>
+                <tr class="order_table_head">
+                    <th>Название</th>
+                    <th>Количество</th>
+                    <th>Цена в момент заказа</th>
+                    <th>Общая стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(dish_info, dish_name, index) in orderData" :key="index">
+                    <td>{{ dish_name }}</td>
+                    <td>{{ dish_info.dish_count }}</td>
+                    <td>{{ dish_info.dish_now_price }}</td>
+                    <td>{{ dish_info.dish_count * dish_info.dish_now_price }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p>Общая стоимость: {{ total }}</p>
+            </div>
         </div>
+    </div>
+    <div v-else>
+        <h1>Page not found</h1>
     </div>
 </template>
 
@@ -41,6 +46,7 @@ export default {
         return{
             selectedDate: null,
             orderData: {},
+            isData: true,
         }
     },
     methods: {
@@ -53,6 +59,7 @@ export default {
                   })
                   .catch(error => {
                       console.log(error)
+                      self.isData = false
                   })
           } else {
               alert('Вы не выбрали дату!\nВыберите дату, пожалуйста :)')

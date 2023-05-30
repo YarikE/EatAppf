@@ -1,30 +1,35 @@
 <template>
-    <NavBar/>
-    <h1 class="page_category">История заказов</h1>
-    <div class="block_content">
-        <div class="select_user">
-            <div>Выберите сотрудника из списка: </div>
-            <select v-model="selectedUser" class="px-5">
-                <option v-for="user in users" v-bind:value="user.user_name">{{user.user_name}}</option>
-            </select>
-            <button class="bg-primary text-white" @click="getHistory(selectedUser)">Выбрать сотрудника</button>
-        </div>
+    <div v-if="isData === true">
+        <NavBar/>
+        <h1 class="page_category">История заказов</h1>
+        <div class="block_content">
+            <div class="select_user">
+                <div>Выберите сотрудника из списка: </div>
+                <select v-model="selectedUser" class="px-5">
+                    <option v-for="user in users" v-bind:value="user.user_name">{{user.user_name}}</option>
+                </select>
+                <button class="bg-primary text-white" @click="getHistory(selectedUser)">Выбрать сотрудника</button>
+            </div>
 
-        <div class="posts">
-            <div v-for="(orders, index) in ordersData" :key="index">
-                <div class="dish_history_element" v-for="(order, index) in orders" :key="index">
-                    <h3 class="dish_date">Дата заказа: {{ order.order_date }}</h3>
-                    <div v-for="dish in order.dishes">
-                        <div class="dish_in_order">
-                            <div>Название блюда:<p class="dish_history_name">{{ dish.dish_name }}</p></div>
-                            <div>Кол-во: {{ dish.dish_count }}</div>
-                            <div>Цена на момент заказа: <h5 class="dish_price">{{ dish.dish_now_price }} ₽</h5></div>
+            <div class="posts">
+                <div v-for="(orders, index) in ordersData" :key="index">
+                    <div class="dish_history_element" v-for="(order, index) in orders" :key="index">
+                        <h3 class="dish_date">Дата заказа: {{ order.order_date }}</h3>
+                        <div v-for="dish in order.dishes">
+                            <div class="dish_in_order">
+                                <div>Название блюда:<p class="dish_history_name">{{ dish.dish_name }}</p></div>
+                                <div>Кол-во: {{ dish.dish_count }}</div>
+                                <div>Цена на момент заказа: <h5 class="dish_price">{{ dish.dish_now_price }} ₽</h5></div>
+                            </div>
                         </div>
+                        <div class="line"></div>
                     </div>
-                    <div class="line"></div>
                 </div>
             </div>
         </div>
+    </div>
+    <div v-else>
+        <h1>Page not found</h1>
     </div>
 </template>
 
@@ -39,6 +44,7 @@ export default {
             selectedUser: null,
             users: [],
             ordersData: {},
+            isData: true,
         }
     },
     mounted() {
@@ -48,13 +54,13 @@ export default {
             })
             .catch(error => {
                 console.log(error)
+                this.isData = false
             })
     },
     methods: {
         getHistory(user) {
             axios.post('http://127.0.0.1:8000/api/history/', {user_name: user})
                 .then(response =>{
-                    console.log(response.data)
                     this.ordersData = response.data
                 })
                 .catch(error => {

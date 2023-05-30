@@ -46,10 +46,9 @@ def get_random_dish(request):
                 json_data.append(data)
 
         return JsonResponse({'dish_list': json_data})
-
-    if request.method == 'GET':
-        return JsonResponse({'Good': 'Good'})
-
+    
+    else: 
+        return HttpResponse('Страница не найдена', status=404)
 
 # Оформление заказа, который сформировал пользователь (сохранение заказа)
 @csrf_exempt
@@ -72,6 +71,8 @@ def put_users_choice(request):
 
         return HttpResponse('Good')
 
+    else:
+        return HttpResponse('Страница не найдена', status=404)
 
 # Получение истории заказов пользователя
 @csrf_exempt
@@ -131,6 +132,9 @@ def get_history_by_name(request):
 
         return JsonResponse(json_data)
 
+    else:
+        return HttpResponse('Страница не найдена', status=404)
+
 
 # Отчет "заказы на дату"
 @csrf_exempt
@@ -152,3 +156,6 @@ def get_date_report(request):
                     result_json[dish.dish_id.dish_name]['dish_count'] += dish.dish_count
 
         return JsonResponse(result_json)
+    
+    else:
+        return HttpResponse('Страница не найдена', status=404)
